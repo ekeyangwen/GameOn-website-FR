@@ -32,7 +32,7 @@ img {
 
 .topnav {
   overflow: hidden;
-  margin: 3.5%;
+  margin: 2rem;
 }
 .header-logo {
   float: left;
@@ -382,8 +382,7 @@ input[data-error]::after {
   background: #232323;
   color: #fff;
   position: relative;
-  text-align: left;
-  min-width: 424px;
+  text-align: center;
 }
 .hero-content::after {
   content: "";
@@ -441,6 +440,7 @@ footer {
   padding-right: 2vw;
   margin: 0 20px;
 }
+
 @media screen and (max-width: 992px) {
   .hero-section {
     display: block;
@@ -478,6 +478,46 @@ footer {
   .copyrights {
     margin-top: 50px;
     text-align: center;
+  }
+  .topnav a {
+    display: none;
+  }
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+  .topnav.responsive {
+    position: relative;
+  }
+  .topnav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .topnav a {
+    display: none;
+  }
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+  .hero-headline {
+    font-size: 2rem;
+    white-space: normal;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .logo {
+    width: 80%;
   }
 }
 
