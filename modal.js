@@ -19,6 +19,7 @@ const mailElem = document.getElementById("email");
 const birthElem = document.getElementById("birthdate");
 const qtityElem = document.getElementById("quantity");
 const cityElem = document.getElementById("city");
+const inputs = this.querySelectorAll("input");
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -38,31 +39,46 @@ function closeModal() {
 }
 
 //test submit event
-submitBtn.forEach((btn) => btn.addEventListener("click", validate));
+submitBtn.forEach((btn) => btn.addEventListener("submit", validate));
 
 //test validate form
-function validate() {
-  // si la valeur du champ prenom est vide
-  if (fnElem.value === "") {
-    // on affiche un message
-    alert("Veuillez indiquer un prénom");
-    // et on indique de ne pas envoyer le formulaire
-    return false;
-  } else {
-    // les données sont ok, on peut envoyer le formulaire
-    return true;
-  }
-}
+//function validate() {
+// si la valeur du champ prenom est vide
+//  if (fnElem.value === "") {
+// on affiche un message
+//   alert("Veuillez indiquer un prénom");
+// et on indique de ne pas envoyer le formulaire
+//  return false;
+// } else {
+// les données sont ok, on peut envoyer le formulaire
+//   return true;
+// }
+//if (lastElem.value === "") {
+// on affiche un message
+// alert("Veuillez indiquer un nom");
+// et on indique de ne pas envoyer le formulaire
+// return false;
+// } else {
+// les données sont ok, on peut envoyer le formulaire
+// return true;
+//}
+
+//  function validate() {
+// si la valeur du champ nom est vide
+// }
+//}
+
+let erreur = "Veuillez renseigner tous les champs";
 
 function validate() {
-  // si la valeur du champ nom est vide
-  if (lastElem.value === "") {
-    // on affiche un message
-    alert("Veuillez indiquer un nom");
-    // et on indique de ne pas envoyer le formulaire
-    return false;
-  } else {
-    // les données sont ok, on peut envoyer le formulaire
-    return true;
+  validate.preventDefault();
+  for (let i = "0"; i < inputs.length; i++) {
+    if (inputs[i].value === "") {
+      return false;
+      alert = erreur;
+    } else {
+      valide.preventDefault();
+      return true;
+    }
   }
 }
