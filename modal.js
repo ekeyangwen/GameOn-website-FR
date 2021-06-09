@@ -12,7 +12,7 @@ const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const closeCross = document.querySelectorAll(".close"); //création d'une constante close
-const submitBtn = document.querySelectorAll(".btn-submit");
+const submitBtn = document.querySelectorAll("btn-submit");
 const fnElem = document.getElementById("first");
 const lastElem = document.getElementById("last");
 const mailElem = document.getElementById("email");
@@ -38,31 +38,86 @@ function closeModal() {
 }
 
 //test submit event
-submitBtn.forEach((btn) => btn.addEventListener("submit", validate)); //fonction globale
+submitBtn.forEach((btn) => btn.addEventListener("click", first));
+submitBtn.forEach((btn) => btn.addEventListener("click", last));
+submitBtn.forEach((btn) => btn.addEventListener("click", mail));
+submitBtn.forEach((btn) => btn.addEventListener("click", quantity));
+submitBtn.forEach((btn) => btn.addEventListener("click", city));
 
-//test validate form
-function validate() {
-  //si la valeur du champ prenom est vide
+function first(e) {
   if (fnElem.value === "") {
     // on affiche un message
-    alert("Veuillez indiquer un prénom");
-    //et on indique de ne pas envoyer le formulaire
+    alert("Veuillez indiquer un nom");
     return false;
+    // et on indique de ne pas envoyer le formulaire
   } else {
     // les données sont ok, on peut envoyer le formulaire
     return true;
   }
+}
+
+//test validate form
+
+function last() {
   if (lastElem.value === "") {
     // on affiche un message
     alert("Veuillez indiquer un nom");
-    // et on indique de ne pas envoyer le formulaire
     return false;
+    // et on indique de ne pas envoyer le formulaire
   } else {
     // les données sont ok, on peut envoyer le formulaire
     return true;
   }
+}
 
-  function validate() {
-    // si la valeur du champ nom est vide
+function mail() {
+  if (mailElem.value === "") {
+    // on affiche un message
+
+    alert("Veuillez indiquer un email");
+    return false;
+    // et on indique de ne pas envoyer le formulaire
+  } else {
+    // les données sont ok, on peut envoyer le formulaire
+    return true;
+  }
+}
+
+function birthdate() {
+  if (birthElem.value === "") {
+    // on affiche un message
+
+    alert("Veuillez indiquer une date de naissance");
+    return false;
+    // et on indique de ne pas envoyer le formulaire
+  } else {
+    // les données sont ok, on peut envoyer le formulaire
+    return true;
+  }
+}
+
+function quantity() {
+  if (qtityElem.value === "") {
+    // on affiche un message
+
+    alert("Veuillez indiquer un nombre de tournois");
+    return false;
+    // et on indique de ne pas envoyer le formulaire
+  } else {
+    // les données sont ok, on peut envoyer le formulaire
+    return true;
+  }
+}
+
+function city() {
+  if (cityElem.value === "") {
+    // on affiche un message
+
+    alert("Veuillez indiquer une ville");
+    return false;
+    // et on indique de ne pas envoyer le formulaire
+  } else {
+    // les données sont ok, on peut envoyer le formulaire
+    return true;
   }
 }
