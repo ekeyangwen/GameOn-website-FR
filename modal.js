@@ -24,6 +24,9 @@ const lastCheck = document.getElementById("lastCheck");
 const birthCheck = document.getElementById("birthCheck");
 const mailCheck = document.getElementById("mailCheck");
 const tournoisCheck = document.getElementById("qtityCheck");
+const cityLocation = document.querySelectorAll(".radio");
+const cityCheck = document.getElementById("cityCheck");
+const fnLength = document.getElementById("fnLength");
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -43,43 +46,48 @@ function closeModal() {
 }
 
 //Validation des champs
-firstRegExp = RegExp("^[a-zA-Z]+$[2,]", "g");
 
-submitBtn.addEventListener("click", first);
+fnElem.addEventListener("click", first);
+let fnRegExp = new RegExp("^[a-zA-Z-]{2,}, g $");
 function first(e) {
   e.preventDefault();
+  if (!fnRegExp.test) {
+    fnLength.innerHTML = "Veuillez remplir au moins deux caractères";
+    return false;
+  }
   if (fnElem.value === "") {
     fnCheck.innerHTML = "Veuillez indiquer un prénom";
     fnCheck.style.fontSize = "10px";
     fnCheck.style.color = "#FF4E60";
-
-    // on affiche un message
     return false;
+    // on affiche un message
+
     // et on indique de ne pas envoyer le formulaire
   } else {
-    // les données sont ok, on peut envoyer le formulaire
+    // les données sont ok, on enleve le message d'erreur et on peut envoyer le formulaire
+    fnCheck.innerHTML = "";
     return true;
   }
 }
 
-submitBtn.addEventListener("click", last);
+lastElem.addEventListener("click", last);
 function last(e) {
   e.preventDefault();
   if (lastElem.value === "") {
     lastCheck.innerHTML = "Veuillez indiquer un nom";
-
     lastCheck.style.fontSize = "10px";
     lastCheck.style.color = "#FF4E60";
     // on affiche un message
     return false;
     // et on indique de ne pas envoyer le formulaire
   } else {
-    // les données sont ok, on peut envoyer le formulaire
+    // les données sont ok, on enleve le message d'erreur et on peut envoyer le formulaire
+    lastCheck.innerHTML = "";
     return true;
   }
 }
 
-submitBtn.addEventListener("click", mail);
+mailElem.addEventListener("click", mail);
 function mail(e) {
   e.preventDefault();
   if (mailElem.value === "") {
@@ -90,12 +98,13 @@ function mail(e) {
     return false;
     // et on indique de ne pas envoyer le formulaire
   } else {
-    // les données sont ok, on peut envoyer le formulaire
+    // les données sont ok, on enleve le message d'erreur et on peut envoyer le formulaire
+    mailCheck.innerHTML = "";
     return true;
   }
 }
 
-submitBtn.addEventListener("click", birthdate);
+birthElem.addEventListener("click", birthdate);
 function birthdate(e) {
   e.preventDefault();
   if (birthElem.value === "") {
@@ -106,12 +115,13 @@ function birthdate(e) {
     return false;
     // et on indique de ne pas envoyer le formulaire
   } else {
-    // les données sont ok, on peut envoyer le formulaire
+    // les données sont ok, on enleve le message d'erreur et on peut envoyer le formulaire
+    birthCheck.innerHTML = "";
     return true;
   }
 }
 
-submitBtn.addEventListener("click", quantity);
+tournoisElem.addEventListener("click", quantity);
 function quantity(e) {
   e.preventDefault();
   if (tournoisElem.value === "") {
@@ -122,7 +132,32 @@ function quantity(e) {
     return false;
     // et on indique de ne pas envoyer le formulaire
   } else {
-    // les données sont ok, on peut envoyer le formulaire
+    // les données sont ok, on enleve le message d'erreur et on peut envoyer le formulaire
+    tournoisCheck.innerHTML = "";
     return true;
   }
 }
+
+cityLocation.addEventListener("focus", validateRadio);
+let formValid = false;
+let l = 0;
+function validateRadio(e) {
+  e.preventDefault();
+  while (!formValid && l < cityLocation.length)
+    if (cityLocation[l].checked) {
+      formValid = true;
+    }
+  if (!formValid) {
+    cityCheck.innerHTML = "Veuillez indiquer une ville";
+    cityCheck.style.fontSize = "10px";
+    cityCheck.style.color = "#FF4E60";
+    return formValid;
+    l++;
+  } else {
+    // les données sont ok, on enleve le message d'erreur et on peut envoyer le formulaire
+    cityCheck.innerHTML = "";
+    return formValid;
+  }
+}
+
+submitBtn.addEventListener("click", validate);
