@@ -20,13 +20,13 @@ const mailElem = document.getElementById("email");
 const birthElem = document.getElementById("birthdate");
 const tournoisElem = document.getElementById("quantity");
 const fnCheck = document.getElementById("fnCheck");
+const fnTest = document.getElementById("fnTest");
 const lastCheck = document.getElementById("lastCheck");
 const birthCheck = document.getElementById("birthCheck");
 const mailCheck = document.getElementById("mailCheck");
 const tournoisCheck = document.getElementById("qtityCheck");
 const cityLocation = document.querySelectorAll(".radio");
 const cityCheck = document.getElementById("cityCheck");
-const fnLength = document.getElementById("fnLength");
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -46,31 +46,23 @@ function closeModal() {
 }
 
 //Validation des champs
+let fnRegExp = new RegExp("^[a-zA-Z-]{2,$", "g");
+fnElem.addEventListener("click", fnRegTest);
+let checkFnRegExp = fnRegExp.test;
 
-fnElem.addEventListener("click", first);
-let fnRegExp = new RegExp("^[a-zA-Z-]{2,}, g $");
-function first(e) {
+function fnRegTest(e) {
   e.preventDefault();
-  if (!fnRegExp.test) {
-    fnLength.innerHTML = "Veuillez remplir au moins deux caractères";
-    return false;
-  }
-  if (fnElem.value === "") {
-    fnCheck.innerHTML = "Veuillez indiquer un prénom";
+  if (!checkFnRegExp) {
+    fnCheck.innerHTML = "Votre nom n'est pas valide";
     fnCheck.style.fontSize = "10px";
     fnCheck.style.color = "#FF4E60";
     return false;
-    // on affiche un message
-
     // et on indique de ne pas envoyer le formulaire
-  } else {
-    // les données sont ok, on enleve le message d'erreur et on peut envoyer le formulaire
-    fnCheck.innerHTML = "";
-    return true;
-  }
+  } else fnCheck.innerHTML = "Bravo";
+  return true;
 }
 
-lastElem.addEventListener("click", last);
+lastElem.addEventListener("change", last);
 function last(e) {
   e.preventDefault();
   if (lastElem.value === "") {
@@ -87,7 +79,7 @@ function last(e) {
   }
 }
 
-mailElem.addEventListener("click", mail);
+mailElem.addEventListener("change", mail);
 function mail(e) {
   e.preventDefault();
   if (mailElem.value === "") {
@@ -104,7 +96,7 @@ function mail(e) {
   }
 }
 
-birthElem.addEventListener("click", birthdate);
+birthElem.addEventListener("change", birthdate);
 function birthdate(e) {
   e.preventDefault();
   if (birthElem.value === "") {
@@ -121,7 +113,7 @@ function birthdate(e) {
   }
 }
 
-tournoisElem.addEventListener("click", quantity);
+tournoisElem.addEventListener("change", quantity);
 function quantity(e) {
   e.preventDefault();
   if (tournoisElem.value === "") {
@@ -138,7 +130,7 @@ function quantity(e) {
   }
 }
 
-cityLocation.addEventListener("focus", validateRadio);
+cityLocation.forEach((btn) => btn.addEventListener("change", validateRadio));
 let formValid = false;
 let l = 0;
 function validateRadio(e) {
@@ -159,5 +151,3 @@ function validateRadio(e) {
     return formValid;
   }
 }
-
-submitBtn.addEventListener("click", validate);
