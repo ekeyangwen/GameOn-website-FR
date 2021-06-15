@@ -11,6 +11,7 @@ function editNav() {
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
+const textControl = document.querySelectorAll(".textControl");
 const closeCross = document.querySelectorAll(".close"); //création d'une constante close
 const submitBtn = document.getElementById("button");
 const form = document.querySelector("#modalForm");
@@ -18,7 +19,7 @@ const fnElem = document.getElementById("first");
 const lastElem = document.getElementById("last");
 const mailElem = document.getElementById("email");
 const birthElem = document.getElementById("birthdate");
-const tournoisElem = document.getElementById("quantity");
+const qtityElem = document.getElementById("quantity");
 const fnCheck = document.getElementById("fnCheck");
 const fnTest = document.getElementById("fnTest");
 const lastCheck = document.getElementById("lastCheck");
@@ -46,23 +47,40 @@ function closeModal() {
 }
 
 //Validation des champs
-let fnRegExp = new RegExp("^[a-zA-Z-]{2,$", "g");
-fnElem.addEventListener("click", fnRegTest);
-let checkFnRegExp = fnRegExp.test;
+const fnRegExp = new RegExp("^[a-zA-Z-+]{2,}$", "g");
+submitBtn.addEventListener("click", fnRegTest);
+submitBtn.addEventListener("click", first);
+submitBtn.addEventListener("click", last);
+submitBtn.addEventListener("click", mail);
+submitBtn.addEventListener("click", birthdate);
+submitBtn.addEventListener("click", quantity);
 
 function fnRegTest(e) {
   e.preventDefault();
+  let checkFnRegExp = fnRegExp.test(fnElem.value);
   if (!checkFnRegExp) {
-    fnCheck.innerHTML = "Votre nom n'est pas valide";
+    fnCheck.innerHTML =
+      "Veuillez entrer 2 caractères ou plus pour le champ du nom";
     fnCheck.style.fontSize = "10px";
     fnCheck.style.color = "#FF4E60";
     return false;
     // et on indique de ne pas envoyer le formulaire
-  } else fnCheck.innerHTML = "Bravo";
+  } else fnCheck.innerHTML = "";
   return true;
 }
 
-lastElem.addEventListener("change", last);
+function first(e) {
+  e.preventDefault();
+  if (fnElem.value === "") {
+    lastCheck.innerHTML = "Veuillez indiquer un prénom";
+    fnCheck.style.fontSize = "10px";
+    fnCheck.style.color = "#FF4E60";
+    // on affiche un message
+    return false;
+  } else fnCheck.innerHTML = "";
+  return true;
+}
+
 function last(e) {
   e.preventDefault();
   if (lastElem.value === "") {
@@ -72,14 +90,11 @@ function last(e) {
     // on affiche un message
     return false;
     // et on indique de ne pas envoyer le formulaire
-  } else {
-    // les données sont ok, on enleve le message d'erreur et on peut envoyer le formulaire
-    lastCheck.innerHTML = "";
-    return true;
-  }
+  } else lastCheck.innerHTML = "";
+  // les données sont ok, on enleve le message d'erreur et on peut envoyer le formulaire
+  return true;
 }
 
-mailElem.addEventListener("change", mail);
 function mail(e) {
   e.preventDefault();
   if (mailElem.value === "") {
@@ -96,7 +111,6 @@ function mail(e) {
   }
 }
 
-birthElem.addEventListener("change", birthdate);
 function birthdate(e) {
   e.preventDefault();
   if (birthElem.value === "") {
@@ -113,24 +127,21 @@ function birthdate(e) {
   }
 }
 
-tournoisElem.addEventListener("change", quantity);
 function quantity(e) {
   e.preventDefault();
-  if (tournoisElem.value === "") {
-    tournoisCheck.innerHTML = "Veuillez indiquer un nombre de tournois";
+  if (qtityElem.value === "") {
     tournoisCheck.style.fontSize = "10px";
     tournoisCheck.style.color = "#FF4E60";
     // on affiche un message
     return false;
     // et on indique de ne pas envoyer le formulaire
   } else {
-    // les données sont ok, on enleve le message d'erreur et on peut envoyer le formulaire
     tournoisCheck.innerHTML = "";
+    // les données sont ok, on enleve le message d'erreur et on peut envoyer le formulaire
     return true;
   }
 }
 
-cityLocation.forEach((btn) => btn.addEventListener("change", validateRadio));
 let formValid = false;
 let l = 0;
 function validateRadio(e) {
