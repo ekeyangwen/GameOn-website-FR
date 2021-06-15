@@ -130,6 +130,7 @@ function birthdate(e) {
 function quantity(e) {
   e.preventDefault();
   if (qtityElem.value === "") {
+    tournoisCheck.innerHTML = "Veuillez indiquer un nombre de tournois";
     tournoisCheck.style.fontSize = "10px";
     tournoisCheck.style.color = "#FF4E60";
     // on affiche un message
