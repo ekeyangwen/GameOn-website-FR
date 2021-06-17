@@ -71,7 +71,7 @@
                   type="text"
                   id="first"
                   name="first"
-                  onsubmit="return fnRegTest();"
+                  onsubmit="return first();"
                 /><span id="fnCheck"></span><br>
               </div>
               <div
@@ -82,7 +82,7 @@
                   type="text"
                   id="last"
                   name="last"
-                  
+                   onsubmit="return last();"
                 /><span id="lastCheck"></span><br>
               </div>
               <div
@@ -93,6 +93,7 @@
                   type="email"
                   id="email"
                   name="email"
+                   onsubmit="return mail();"
                   /><span id="mailCheck"></span><br>
               </div>
               <div
@@ -103,12 +104,13 @@
                   type="date"
                   id="birthdate"
                   name="birthdate"
+                   onsubmit="return birthdate();"
                  /><span id="birthCheck"></span><br>
               </div>
               <div
                 class="formData">
                 <label for="quantity">À combien de tournois GameOn avez-vous déjà participé ?</label><br>
-                <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99"/>
+                <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99" onsubmit="return quantity();"/>
               <span id="qtityCheck"></span><br>
               </div>
               <p class="text-label">Quelles villes ?</p>

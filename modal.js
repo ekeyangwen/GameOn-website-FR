@@ -10,7 +10,7 @@ function editNav() {
 // DOM Elements
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
-const formData = document.querySelectorAll(".formData");
+const redElement = document.querySelectorAll(".textControl");
 const textControl = document.querySelectorAll(".textControl");
 const closeCross = document.querySelectorAll(".close"); //création d'une constante close
 const submitBtn = document.getElementById("button");
@@ -28,6 +28,7 @@ const mailCheck = document.getElementById("mailCheck");
 const tournoisCheck = document.getElementById("qtityCheck");
 const cityLocation = document.querySelectorAll(".radio");
 const cityCheck = document.getElementById("cityCheck");
+const redBorder = document.getElementsByClassName(".formData");
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -47,82 +48,95 @@ function closeModal() {
 }
 
 //Validation des champs
-const fnRegExp = new RegExp("^[a-zA-Z-+]{2,}$", "g");
-submitBtn.addEventListener("click", fnRegTest);
-submitBtn.addEventListener("click", first);
-submitBtn.addEventListener("click", last);
-submitBtn.addEventListener("click", mail);
-submitBtn.addEventListener("click", birthdate);
+
 submitBtn.addEventListener("click", quantity);
-
-function fnRegTest(e) {
-  e.preventDefault();
-  let checkFnRegExp = fnRegExp.test(fnElem.value);
-  if (!checkFnRegExp) {
-    fnCheck.innerHTML =
-      "Veuillez entrer 2 caractères ou plus pour le champ du nom";
-    fnCheck.style.fontSize = "10px";
-    fnCheck.style.color = "#FF4E60";
-    return false;
-    // et on indique de ne pas envoyer le formulaire
-  } else fnCheck.innerHTML = "";
-  return true;
-}
-
+submitBtn.addEventListener("click", first);
 function first(e) {
   e.preventDefault();
-  if (fnElem.value === "") {
-    lastCheck.innerHTML = "Veuillez indiquer un prénom";
+  const fnRegExp = /[^\s][a-zA-Z-+]{2,30}/g;
+  let checkFnRegExp = fnRegExp.test(fnElem.value);
+  if (fnElem.value == "") {
+    fnCheck.innerHTML = "Veuillez indiquer un prénom";
     fnCheck.style.fontSize = "10px";
     fnCheck.style.color = "#FF4E60";
     // on affiche un message
     return false;
-  } else fnCheck.innerHTML = "";
-  return true;
+  }
+  if (!checkFnRegExp) {
+    fnCheck.innerHTML =
+      "Veuillez entrer 2 caractères ou plus pour le champ du prénom";
+    fnCheck.style.fontSize = "10px";
+    fnCheck.style.color = "#FF4E60";
+    return false;
+  } else {
+    fnCheck.innerHTML = "";
+    return true;
+  }
 }
 
+submitBtn.addEventListener("click", last);
 function last(e) {
   e.preventDefault();
+  const lastRegExp = /[^\s][a-zA-Z-+]{2,30}/g;
+  let checklastRegExp = lastRegExp.test(lastElem.value);
   if (lastElem.value === "") {
     lastCheck.innerHTML = "Veuillez indiquer un nom";
     lastCheck.style.fontSize = "10px";
     lastCheck.style.color = "#FF4E60";
     // on affiche un message
     return false;
-    // et on indique de ne pas envoyer le formulaire
-  } else lastCheck.innerHTML = "";
-  // les données sont ok, on enleve le message d'erreur et on peut envoyer le formulaire
-  return true;
+  } else if (!checklastRegExp) {
+    lastCheck.innerHTML =
+      "Veuillez entrer 2 caractères valides ou plus pour le champ du nom";
+    lastCheck.style.fontSize = "10px";
+    lastCheck.style.color = "#FF4E60";
+    return false;
+  } else {
+    lastCheck.innerHTML = "";
+    return true;
+  }
 }
-
+submitBtn.addEventListener("click", mail);
 function mail(e) {
   e.preventDefault();
+  const mailRegExp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}\.[a-z]{2,4}$/g;
+  let checkmailRegExp = mailRegExp.test(mailElem.value);
   if (mailElem.value === "") {
     mailCheck.innerHTML = "Veuillez indiquer un email";
     mailCheck.style.fontSize = "10px";
     mailCheck.style.color = "#FF4E60";
     // on affiche un message
     return false;
-    // et on indique de ne pas envoyer le formulaire
+  } else if (!checkmailRegExp) {
+    mailCheck.innerHTML = "Veuillez indiquer un email valide";
+    mailCheck.style.fontSize = "10px";
+    mailCheck.style.color = "#FF4E60";
+    return false;
   } else {
-    // les données sont ok, on enleve le message d'erreur et on peut envoyer le formulaire
     mailCheck.innerHTML = "";
     return true;
   }
 }
 
+submitBtn.addEventListener("click", birthdate);
 function birthdate(e) {
   e.preventDefault();
+  const birthRegExp =
+    /^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$/;
+  let checkbirthRegExp = birthRegExp.test(birthElem.value);
   if (birthElem.value === "") {
-    birthCheck.innerHTML = "Veuillez indiquer une date de naissance";
+    birthCheck.innerHTML = "Veuillez indiquer un ebirth";
     birthCheck.style.fontSize = "10px";
     birthCheck.style.color = "#FF4E60";
     // on affiche un message
     return false;
-    // et on indique de ne pas envoyer le formulaire
+  } else if (!checkmailRegExp) {
+    mailCheck.innerHTML = "Veuillez indiquer un email valide";
+    mailCheck.style.fontSize = "10px";
+    mailCheck.style.color = "#FF4E60";
+    return false;
   } else {
-    // les données sont ok, on enleve le message d'erreur et on peut envoyer le formulaire
-    birthCheck.innerHTML = "";
+    mailCheck.innerHTML = "";
     return true;
   }
 }
@@ -136,11 +150,9 @@ function quantity(e) {
     // on affiche un message
     return false;
     // et on indique de ne pas envoyer le formulaire
-  } else {
-    tournoisCheck.innerHTML = "";
-    // les données sont ok, on enleve le message d'erreur et on peut envoyer le formulaire
-    return true;
-  }
+  } else tournoisCheck.innerHTML = "";
+  // les données sont ok, on enleve le message d'erreur et on peut envoyer le formulaire
+  return true;
 }
 
 let formValid = false;
@@ -157,9 +169,8 @@ function validateRadio(e) {
     cityCheck.style.color = "#FF4E60";
     return formValid;
     l++;
-  } else {
-    // les données sont ok, on enleve le message d'erreur et on peut envoyer le formulaire
-    cityCheck.innerHTML = "";
-    return formValid;
   }
+  // les données sont ok, on enleve le message d'erreur et on peut envoyer le formulaire
+  else cityCheck.innerHTML = "";
+  return formValid;
 }
