@@ -49,7 +49,6 @@ function closeModal() {
 
 //Validation des champs
 
-submitBtn.addEventListener("click", quantity);
 submitBtn.addEventListener("click", first);
 function first(e) {
   e.preventDefault();
@@ -96,6 +95,7 @@ function last(e) {
     return true;
   }
 }
+
 submitBtn.addEventListener("click", mail);
 function mail(e) {
   e.preventDefault();
@@ -122,37 +122,45 @@ submitBtn.addEventListener("click", birthdate);
 function birthdate(e) {
   e.preventDefault();
   const birthRegExp =
-    /^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$/;
+    /(0[1-9]|[12][0-9]|3[01])[/](0[1-9]|1[12])[/](19([0-9][0-9])|(20[0-0][0-3]))/;
   let checkbirthRegExp = birthRegExp.test(birthElem.value);
   if (birthElem.value === "") {
-    birthCheck.innerHTML = "Veuillez indiquer un ebirth";
+    birthCheck.innerHTML = "Veuillez indiquer une date de naissance";
     birthCheck.style.fontSize = "10px";
     birthCheck.style.color = "#FF4E60";
     // on affiche un message
     return false;
-  } else if (!checkmailRegExp) {
-    mailCheck.innerHTML = "Veuillez indiquer un email valide";
-    mailCheck.style.fontSize = "10px";
-    mailCheck.style.color = "#FF4E60";
+  } else if (!checkbirthRegExp) {
+    birthCheck.innerHTML = "Veuillez indiquer une date de naissance valide";
+    birthCheck.style.fontSize = "10px";
+    birthCheck.style.color = "#FF4E60";
     return false;
   } else {
-    mailCheck.innerHTML = "";
+    birthCheck.innerHTML = "";
     return true;
   }
 }
 
+submitBtn.addEventListener("click", quantity);
 function quantity(e) {
   e.preventDefault();
+  const quantityRegExp = /[0-9+]/g;
+  let checkQtityRegExp = quantityRegExp.test(qtityElem.value);
   if (qtityElem.value === "") {
-    tournoisCheck.innerHTML = "Veuillez indiquer un nombre de tournois";
-    tournoisCheck.style.fontSize = "10px";
-    tournoisCheck.style.color = "#FF4E60";
+    qtityCheck.innerHTML = "Veuillez indiquer un nombre de tournois";
+    qtityCheck.style.fontSize = "10px";
+    qtityCheck.style.color = "#FF4E60";
     // on affiche un message
     return false;
-    // et on indique de ne pas envoyer le formulaire
-  } else tournoisCheck.innerHTML = "";
-  // les données sont ok, on enleve le message d'erreur et on peut envoyer le formulaire
-  return true;
+  } else if (!checkQtityRegExp) {
+    qtityCheck.innerHTML = "Veuillez indiquer un nombre de tournois";
+    qtityCheck.style.fontSize = "10px";
+    qtityCheck.style.color = "#FF4E60";
+    return false;
+  } else {
+    qtityCheck.innerHTML = "";
+    return true;
+  }
 }
 
 let formValid = false;
