@@ -10,7 +10,6 @@ function editNav() {
 // DOM Elements
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
-const redElement = document.querySelectorAll(".textControl");
 const textControl = document.querySelectorAll(".textControl");
 const closeCross = document.querySelectorAll(".close"); //création d'une constante close
 const submitBtn = document.getElementById("button");
@@ -121,19 +120,11 @@ function mail(e) {
 submitBtn.addEventListener("click", birthdate);
 function birthdate(e) {
   e.preventDefault();
-  const birthRegExp =
-    /(0[1-9]|[12][0-9]|3[01])[/](0[1-9]|1[12])[/](19([0-9][0-9])|(20[0-0][0-3]))/;
-  let checkbirthRegExp = birthRegExp.test(birthElem.value);
   if (birthElem.value === "") {
     birthCheck.innerHTML = "Veuillez indiquer une date de naissance";
     birthCheck.style.fontSize = "10px";
     birthCheck.style.color = "#FF4E60";
     // on affiche un message
-    return false;
-  } else if (!checkbirthRegExp) {
-    birthCheck.innerHTML = "Veuillez indiquer une date de naissance valide";
-    birthCheck.style.fontSize = "10px";
-    birthCheck.style.color = "#FF4E60";
     return false;
   } else {
     birthCheck.innerHTML = "";
@@ -163,22 +154,13 @@ function quantity(e) {
   }
 }
 
-let formValid = false;
-let l = 0;
-function validateRadio(e) {
+submitBtn.addEventListener("submit", validate);
+function validate(e) {
   e.preventDefault();
-  while (!formValid && l < cityLocation.length)
-    if (cityLocation[l].checked) {
-      formValid = true;
-    }
-  if (!formValid) {
-    cityCheck.innerHTML = "Veuillez indiquer une ville";
-    cityCheck.style.fontSize = "10px";
-    cityCheck.style.color = "#FF4E60";
-    return formValid;
-    l++;
+  if ((!first, !last, !mail, !birthdate, !quantity)) {
+    alert("Veuillez remplir tous les champs");
+    return false;
+  } else {
+    modalbg.style.display = "block";
   }
-  // les données sont ok, on enleve le message d'erreur et on peut envoyer le formulaire
-  else cityCheck.innerHTML = "";
-  return formValid;
 }
