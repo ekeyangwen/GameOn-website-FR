@@ -197,6 +197,34 @@ label {
   display: inline-block;
   margin-bottom: 11px;
 }
+
+#modalValid {
+  display: none;
+}
+.modalValid-body {
+  height: 850.6087036132812px;
+  width: 536px;
+  left: 460px;
+  top: 87px;
+  border-radius: 8px;
+  box-shadow: 0px 12px 12px 0px #00000040;
+}
+.validTxt {
+  position: absolute;
+  width: 320px;
+  height: 153px;
+  left: 100px;
+  top: 200px;
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 36px;
+  line-height: 51px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #ffffff;
+}
 input {
   padding: 8px;
   border: 0.8px solid #ccc;

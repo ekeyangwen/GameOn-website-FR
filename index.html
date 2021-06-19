@@ -36,11 +36,15 @@
             Marathon national<br>
             de jeux vidéos
           </h1>
-          <p class="hero-text">
+           <p class="hero-text">
             Vous aimez jouer ? Notre prochain évènement gaming est ouvert
             aux réservations... Places limitées !
           </p>
+          <button class="btn-signup modal-btn">
+          je m'inscris
+        </button>
         </div>
+          
         <div class="hero-img">
           <img src="./bg_img.jpg" alt="img" />
         </div>
@@ -48,7 +52,6 @@
           je m'inscris
         </button>
       </div>
-
       <div class="bground">
         <div class="content">
           <span class="close"></span>
@@ -60,7 +63,7 @@
               method="get"
               onsubmit="return validate();"
             >
-              <div
+            <div
                 class="formData">
                 <label for="first">Prénom</label><br>
                 <input
@@ -213,6 +216,20 @@
           </div>
         </div>
       </div>
+             <div id="modalValid">
+        <div class="content">
+          <span class="close"></span>
+          <div class="modalValid-body">
+             <p class="validTxt">Thank you for submitting your registration details</p> 
+             <input
+          class="btn-submit"
+                id="button"
+                type="submit"
+                value="C'est parti"
+              />
+            </div>
+            </div>
+            </div>
     </main>
     <footer>
       <p class="copyrights">

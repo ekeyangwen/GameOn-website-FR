@@ -28,6 +28,7 @@ const tournoisCheck = document.getElementById("qtityCheck");
 const cityLocation = document.querySelectorAll(".radio");
 const cityCheck = document.getElementById("cityCheck");
 const redBorder = document.getElementsByClassName(".formData");
+const modalVal = document.getElementById("modalValid");
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -44,6 +45,8 @@ function launchModal() {
 function closeModal() {
   modalbg.style.display = "none";
   modalbg.style.aria = "hidden";
+  modalVal.style.display = "none";
+  modalVal.style.aria = "hidden";
 }
 
 //Validation des champs
@@ -154,13 +157,26 @@ function quantity(e) {
   }
 }
 
-submitBtn.addEventListener("submit", validate);
+function hideValid() {
+  modalVal.style.display = "none";
+  modalVal.style.aria = "hidden";
+}
+
+submitBtn.addEventListener("click", validate);
 function validate(e) {
-  e.preventDefault();
-  if ((!first, !last, !mail, !birthdate, !quantity)) {
-    alert("Veuillez remplir tous les champs");
+  if (
+    first == false ||
+    last == false ||
+    mail == false ||
+    birthdate == false ||
+    quantity == false
+  ) {
+    alert("STOP");
     return false;
   } else {
-    modalbg.style.display = "block";
+    modalbg.style.display = "none";
+    modalbg.style.aria = "hidden";
+    modalVal.style.display = "flex";
+    return true;
   }
 }
