@@ -152,7 +152,8 @@ function quantity(e) {
     return false;
   } else {
     qtityCheck.innerHTML = "";
-    return true;
+    return true
+    retune false
   }
 }
 
