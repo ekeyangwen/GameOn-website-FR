@@ -12,7 +12,7 @@ const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const textControl = document.querySelectorAll(".textControl");
 const closeCross = document.querySelectorAll(".close"); //création d'une constante close
-const submitBtn = document.getElementById("button");
+const submitBtn = document.querySelectorAll(".btn-submit");
 const form = document.querySelector("#modalForm");
 const fnElem = document.getElementById("first");
 const lastElem = document.getElementById("last");
@@ -30,6 +30,7 @@ const cityCheck = document.getElementById("cityCheck");
 const redBorder = document.getElementsByClassName(".formData");
 const modalVal = document.getElementById("modalValid");
 const btnClose = document.querySelectorAll(".btnClose");
+const inputs = document.querySelectorAll(".input");
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -50,7 +51,7 @@ function closeModal() {
 
 //Validation des champs
 
-fnElem.addEventListener("change", first);
+submitBtn.forEach((btn) => btn.addEventListener("click", first));
 function first(e) {
   e.preventDefault();
   const fnRegExp = /[^\s][a-zA-Z-+]{2,30}/g;
@@ -74,7 +75,7 @@ function first(e) {
   }
 }
 
-lastElem.addEventListener("change", last);
+submitBtn.forEach((btn) => btn.addEventListener("click", last));
 function last(e) {
   e.preventDefault();
   const lastRegExp = /[^\s][a-zA-Z-+]{2,30}/g;
@@ -97,7 +98,7 @@ function last(e) {
   }
 }
 
-mailElem.addEventListener("change", mail);
+submitBtn.forEach((btn) => btn.addEventListener("click", mail));
 function mail(e) {
   e.preventDefault();
   const mailRegExp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}\.[a-z]{2,4}$/g;
@@ -119,7 +120,7 @@ function mail(e) {
   }
 }
 
-birthElem.addEventListener("change", birthdate);
+submitBtn.forEach((btn) => btn.addEventListener("click", birthdate));
 function birthdate(e) {
   e.preventDefault();
   if (birthElem.value === "") {
@@ -134,7 +135,7 @@ function birthdate(e) {
   }
 }
 
-qtityElem.addEventListener("change", quantity);
+submitBtn.forEach((btn) => btn.addEventListener("click", quantity));
 function quantity(e) {
   e.preventDefault();
   const quantityRegExp = /[0-9+]/g;
@@ -156,21 +157,28 @@ function quantity(e) {
   }
 }
 
-submitBtn.addEventListener("click", validate);
+//Launch Valid form
+submitBtn.forEach((btn) => btn.addEventListener("click", validate));
 function validate(e) {
   e.preventDefault();
-  if (!first && !last && !mail && !birthdate && !quantity) {
-    alert("STOP");
+  if (
+    first == false ||
+    last == false ||
+    mail == false ||
+    birthdate == false ||
+    quantity == false
+  ) {
     modalVal.style.display = "none";
-    modalbg.style.display = "block";
+    modalVal.style.aria = "hidden";
+    alert("STOP");
     return false;
   } else {
-    modalbg.style.aria = "hidden";
     modalVal.style.display = "block";
     return true;
   }
 }
 
+//Close Valid form
 btnClose.forEach((btn) => btn.addEventListener("click", closeValid));
 function closeValid() {
   modalVal.style.display = "none";

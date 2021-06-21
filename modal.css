@@ -159,8 +159,7 @@ main {
   font-size: 16px;
 }
 
-.bground,
-#modalValid {
+.bground {
   display: none;
   position: fixed;
   z-index: 1;
@@ -172,6 +171,16 @@ main {
   background-color: rgba(26, 39, 156, 0.4);
 }
 
+#modalValid {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(26, 39, 156, 0.4);
+}
 .content {
   margin: 5% auto;
   width: 100%;
