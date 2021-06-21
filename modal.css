@@ -172,6 +172,7 @@ main {
 }
 
 #modalValid {
+  display: none;
   position: fixed;
   z-index: 1;
   left: 0;
@@ -208,9 +209,6 @@ label {
   margin-bottom: 11px;
 }
 
-#modalValid {
-  display: none;
-}
 .modalValid-body {
   height: 850.6087036132812px;
   width: 536px;

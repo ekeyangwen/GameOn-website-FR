@@ -13,7 +13,7 @@ const modalBtn = document.querySelectorAll(".modal-btn");
 const textControl = document.querySelectorAll(".textControl");
 const closeCross = document.querySelectorAll(".close"); //création d'une constante close
 const submitBtn = document.querySelectorAll(".btn-submit");
-const form = document.querySelector("#modalForm");
+const form = document.getElementById("modalForm");
 const fnElem = document.getElementById("first");
 const lastElem = document.getElementById("last");
 const mailElem = document.getElementById("email");
@@ -54,7 +54,7 @@ function closeModal() {
 submitBtn.forEach((btn) => btn.addEventListener("click", first));
 function first(e) {
   e.preventDefault();
-  const fnRegExp = /[^\s][a-zA-Z-+]{2,30}/g;
+  const fnRegExp = /[^\s][a-zA-Z-+]{2,30}[!/d]/g;
   let checkFnRegExp = fnRegExp.test(fnElem.value);
   if (fnElem.value == "") {
     fnCheck.innerHTML = "Veuillez indiquer un prénom";
@@ -65,7 +65,7 @@ function first(e) {
   }
   if (!checkFnRegExp) {
     fnCheck.innerHTML =
-      "Veuillez entrer 2 caractères ou plus pour le champ du prénom";
+      "Veuillez entrer 2 caractères valides ou plus pour le champ du prénom";
     fnCheck.style.fontSize = "10px";
     fnCheck.style.color = "#FF4E60";
     return false;
@@ -131,6 +131,8 @@ function birthdate(e) {
     return false;
   } else {
     birthCheck.innerHTML = "";
+    modalbg.style.display = "none";
+    modalbg.style.aria = "hidden";
     return true;
   }
 }
@@ -158,19 +160,20 @@ function quantity(e) {
 }
 
 //Launch Valid form
+
 submitBtn.forEach((btn) => btn.addEventListener("click", validate));
+form.addEventListener("submit", validate);
+
 function validate(e) {
-  e.preventDefault();
   if (
-    first == false ||
-    last == false ||
-    mail == false ||
-    birthdate == false ||
-    quantity == false
+    !first == true ||
+    !last == true ||
+    !mail == true ||
+    !birthdate == true ||
+    !quantity == true
   ) {
+    e.preventDefault();
     modalVal.style.display = "none";
-    modalVal.style.aria = "hidden";
-    alert("STOP");
     return false;
   } else {
     modalVal.style.display = "block";

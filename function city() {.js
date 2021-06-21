@@ -417,3 +417,19 @@ function validate(e) {
     return true;
   }
 }*/
+
+
+submitBtn.forEach((btn) => btn.addEventListener("click", validation));
+function validation(e) {
+  e.preventDefault();
+  let checkFirst = first.value;
+  if (checkFirst == false && !last && !mail && !birthdate && !quantity) {
+    alert("STOP");
+    return false;
+  } else {
+    modalbg.style.aria = "hidden";
+    modalbg.style.display = "none";
+    modalVal.style.display = "block";
+    return true;
+  }
+}
