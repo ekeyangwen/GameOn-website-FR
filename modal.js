@@ -12,8 +12,8 @@ const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const textControl = document.querySelectorAll(".textControl");
 const closeCross = document.querySelectorAll(".close"); //création d'une constante close
-const submitBtn = document.querySelectorAll(".btn-submit");
 const form = document.getElementById("modalForm");
+const submitBtn = document.querySelectorAll(".btn-submit");
 const fnElem = document.getElementById("first");
 const lastElem = document.getElementById("last");
 const mailElem = document.getElementById("email");
@@ -27,7 +27,7 @@ const mailCheck = document.getElementById("mailCheck");
 const tournoisCheck = document.getElementById("qtityCheck");
 const cityLocation = document.querySelectorAll(".radio");
 const cityCheck = document.getElementById("cityCheck");
-const redBorder = document.getElementsByClassName(".formData");
+const redBorder = document.querySelector(".formData");
 const modalVal = document.getElementById("modalValid");
 const btnClose = document.querySelectorAll(".btnClose");
 const inputs = document.querySelectorAll(".input");
@@ -51,56 +51,53 @@ function closeModal() {
 
 //Validation des champs
 
-submitBtn.forEach((btn) => btn.addEventListener("click", first));
-function first(e) {
-  e.preventDefault();
-  const fnRegExp = /[^\s][a-zA-Z-+]{2,30}[!/d]/g;
+function first() {
+  const fnRegExp = /[a-zA-Z-+]{2,}/;
   let checkFnRegExp = fnRegExp.test(fnElem.value);
   if (fnElem.value == "") {
-    fnCheck.innerHTML = "Veuillez indiquer un prénom";
-    fnCheck.style.fontSize = "10px";
-    fnCheck.style.color = "#FF4E60";
+    redBorder.setAttribute("data-error", "Veuillez entrer un prénom");
+    redBorder.setAttribute("data-error-visible", "true");
+
     // on affiche un message
     return false;
   }
   if (!checkFnRegExp) {
-    fnCheck.innerHTML =
-      "Veuillez entrer 2 caractères valides ou plus pour le champ du prénom";
-    fnCheck.style.fontSize = "10px";
-    fnCheck.style.color = "#FF4E60";
+    redBorder.setAttribute(
+      "data-error",
+      "Veuillez entrer 2 caractères valides ou plus pour le champ du prénom"
+    );
+    redBorder.setAttribute("data-error-visible", "true");
     return false;
   } else {
-    fnCheck.innerHTML = "";
+    redBorder.removeAttribute("data-error", "");
+    redBorder.removeAttribute("data-error-visible", "false");
     return true;
   }
 }
 
-submitBtn.forEach((btn) => btn.addEventListener("click", last));
-function last(e) {
-  e.preventDefault();
-  const lastRegExp = /[^\s][a-zA-Z-+]{2,30}/g;
+function last() {
+  const lastRegExp = /[a-zA-Z-+]{2,30}/g;
   let checklastRegExp = lastRegExp.test(lastElem.value);
   if (lastElem.value === "") {
-    lastCheck.innerHTML = "Veuillez indiquer un nom";
-    lastCheck.style.fontSize = "10px";
-    lastCheck.style.color = "#FF4E60";
-    // on affiche un message
+    redBorder.setAttribute("data-error", "Veuillez indiquer un nom");
+    redBorder.setAttribute("data-error-visible", "true");
     return false;
   } else if (!checklastRegExp) {
-    lastCheck.innerHTML =
-      "Veuillez entrer 2 caractères valides ou plus pour le champ du nom";
-    lastCheck.style.fontSize = "10px";
-    lastCheck.style.color = "#FF4E60";
+    redBorder.setAttribute(
+      "data-error",
+      "Veuillez entrer 2 caractères valides ou plus pour le champ du nom"
+    );
+    redBorder.setAttribute("data-error-visible", "true");
+
     return false;
   } else {
-    lastCheck.innerHTML = "";
+    redBorder.removeAttribute("data-error", "");
+    redBorder.removeAttribute("data-error-visible", "false");
     return true;
   }
 }
 
-submitBtn.forEach((btn) => btn.addEventListener("click", mail));
-function mail(e) {
-  e.preventDefault();
+function mail() {
   const mailRegExp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}\.[a-z]{2,4}$/g;
   let checkmailRegExp = mailRegExp.test(mailElem.value);
   if (mailElem.value === "") {
@@ -120,9 +117,7 @@ function mail(e) {
   }
 }
 
-submitBtn.forEach((btn) => btn.addEventListener("click", birthdate));
-function birthdate(e) {
-  e.preventDefault();
+function birthdate() {
   if (birthElem.value === "") {
     birthCheck.innerHTML = "Veuillez indiquer une date de naissance";
     birthCheck.style.fontSize = "10px";
@@ -137,9 +132,7 @@ function birthdate(e) {
   }
 }
 
-submitBtn.forEach((btn) => btn.addEventListener("click", quantity));
-function quantity(e) {
-  e.preventDefault();
+function quantity() {
   const quantityRegExp = /[0-9+]/g;
   let checkQtityRegExp = quantityRegExp.test(qtityElem.value);
   if (qtityElem.value === "") {
@@ -160,19 +153,11 @@ function quantity(e) {
 }
 
 //Launch Valid form
+submitBtn.forEach((btn) => btn.addEventListener("click", validation));
 
-submitBtn.forEach((btn) => btn.addEventListener("click", validate));
-form.addEventListener("submit", validate);
-
-function validate(e) {
-  if (
-    !first == true ||
-    !last == true ||
-    !mail == true ||
-    !birthdate == true ||
-    !quantity == true
-  ) {
-    e.preventDefault();
+function validation(e) {
+  e.preventDefault();
+  if (!first() || !last() || !mail() || !birthdate() || !quantity()) {
     modalVal.style.display = "none";
     return false;
   } else {
