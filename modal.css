@@ -234,14 +234,21 @@ label {
   color: #ffffff;
 }
 
-.text-control {
+.text-control,
+.last-text-control,
+.mail-text-control,
+.birth-text-control,
+.qtity-text-control {
   padding: 8px;
   border: 0.8px solid #ccc;
   outline: none;
 }
+
 .text-control,
 .last-text-control,
-.mail-text-control {
+.mail-text-control,
+.birth-text-control,
+.qtity-text-control {
   margin: 0;
   padding: 8px;
   width: 100%;
@@ -251,14 +258,20 @@ label {
 }
 
 .text-control[data-error-visible="true"],
-.last-text-control[data-error-visible="true"] {
+.last-text-control[data-error-visible="true"],
+.mail-text-control[data-error-visible="true"],
+.birth-text-control[data-error-visible="true"],
+.qtity-text-control[data-error-visible="true"] {
   content: attr(data-error-visible);
   border: 2px solid #e54858;
   opacity: 1;
 }
 
 .formData[data-error]::after,
-.lastFormData[data-error]::after {
+.lastFormData[data-error]::after,
+.mailFormData[data-error]::after,
+.birthFormData[data-error]::after,
+.qtityFormData[data-error]::after {
   content: attr(data-error);
   font-size: 0.4em;
   color: red;

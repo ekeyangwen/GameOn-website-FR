@@ -26,6 +26,12 @@ const redBorderForm = document.querySelector(".formData");
 const lastRedBorderForm = document.querySelector(".lastFormData");
 const red = document.querySelector(".text-control");
 const lastRed = document.querySelector(".last-text-control");
+const mailRed = document.querySelector(".mail-text-control");
+const mailRedBorderForm = document.querySelector(".mailFormData");
+const birthRed = document.querySelector(".birth-text-control");
+const birthRedBorderForm = document.querySelector(".birthFormData");
+const qtityRed = document.querySelector(".qtity-text-control");
+const qtityRedBorderForm = document.querySelector(".qtityFormData");
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
@@ -82,7 +88,6 @@ function last() {
       "Veuillez entrer 2 caractères valides ou plus pour le champ du nom"
     );
     lastRed.setAttribute("data-error-visible", "true");
-
     return false;
   } else {
     lastRedBorderForm.removeAttribute("data-error", "");
@@ -95,33 +100,45 @@ function mail() {
   const mailRegExp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}\.[a-z]{2,4}$/g;
   let checkmailRegExp = mailRegExp.test(mailElem.value);
   if (mailElem.value === "") {
-    mailCheck.innerHTML = "Veuillez indiquer un email";
-    mailCheck.style.fontSize = "10px";
-    mailCheck.style.color = "#FF4E60";
-    // on affiche un message
+    mailRedBorderForm.setAttribute("data-error", "Veuillez indiquer un email");
+    mailRed.setAttribute("data-error-visible", "true");
     return false;
   } else if (!checkmailRegExp) {
-    mailCheck.innerHTML = "Veuillez indiquer un email valide";
-    mailCheck.style.fontSize = "10px";
-    mailCheck.style.color = "#FF4E60";
+    mailRedBorderForm.setAttribute(
+      "data-error",
+      "Veuillez indiquer un email valide"
+    );
+    mailRed.setAttribute("data-error-visible", "true");
+    console.log("true");
     return false;
   } else {
-    mailCheck.innerHTML = "";
+    mailRedBorderForm.removeAttribute("data-error", "");
+    mailRed.removeAttribute("data-error-visible", "false");
     return true;
   }
 }
 
 function birthdate() {
+  const birthRegExp = /[^a-z]/;
+  let checkbirthRegExp = birthRegExp.test(birthElem.value);
   if (birthElem.value === "") {
-    birthCheck.innerHTML = "Veuillez indiquer une date de naissance";
-    birthCheck.style.fontSize = "10px";
-    birthCheck.style.color = "#FF4E60";
-    // on affiche un message
+    birthRedBorderForm.setAttribute(
+      "data-error",
+      "Veuillez indiquer une date de naissance"
+    );
+    birthRed.setAttribute("data-error-visible", "true");
+    return false;
+  } else if (!checkbirthRegExp) {
+    birthRedBorderForm.setAttribute(
+      "data-error",
+      "Veuillez indiquer une date de naissance valide"
+    );
+    birthRed.setAttribute("data-error-visible", "true");
+    console.log("true");
     return false;
   } else {
-    birthCheck.innerHTML = "";
-    modalbg.style.display = "none";
-    modalbg.style.aria = "hidden";
+    birthRedBorderForm.removeAttribute("data-error", "");
+    birthRed.removeAttribute("data-error-visible", "false");
     return true;
   }
 }
@@ -130,18 +147,23 @@ function quantity() {
   const quantityRegExp = /[0-9+]/g;
   let checkQtityRegExp = quantityRegExp.test(qtityElem.value);
   if (qtityElem.value === "") {
-    qtityCheck.innerHTML = "Veuillez indiquer un nombre de tournois";
-    qtityCheck.style.fontSize = "10px";
-    qtityCheck.style.color = "#FF4E60";
-    // on affiche un message
+    qtityRedBorderForm.setAttribute(
+      "data-error",
+      "Veuillez indiquer un nombre de tournois"
+    );
+    qtityRed.setAttribute("data-error-visible", "true");
     return false;
   } else if (!checkQtityRegExp) {
-    qtityCheck.innerHTML = "Veuillez indiquer un nombre de tournois";
-    qtityCheck.style.fontSize = "10px";
-    qtityCheck.style.color = "#FF4E60";
+    qtityRedBorderForm.setAttribute(
+      "data-error",
+      "Veuillez indiquer une valeur numérique"
+    );
+    qtityRed.setAttribute("data-error-visible", "true");
+    console.log("true");
     return false;
   } else {
-    qtityCheck.innerHTML = "";
+    qtityRedBorderForm.removeAttribute("data-error", "");
+    qtityRed.removeAttribute("data-error-visible", "false");
     return true;
   }
 }
