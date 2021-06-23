@@ -433,3 +433,36 @@ function validation(e) {
     return true;
   }
 }
+/*
+.fnFormData::after,
+.lastFormData::after,
+.mailFormData::after,
+.birthFormData::after,
+.qtityFormData::after,
+.cityFormData::after,
+.CheckFormData
+
+.fnFormData::after,
+.lastFormData::after,
+.mailFormData::after,
+.birthFormData::after,
+.qtityFormData::after,
+.cityFormData::after,
+.CheckFormData::after {
+  content: attr(data-error-visible= "true");
+  opacity: 1;
+}
+
+.[data-error]::after {
+  content: attr(data-error);
+  font-size: 0.4em;
+  color: #e54858;
+  display: block;
+  margin-top: 7px;
+  margin-bottom: 7px;
+  text-align: right;
+  line-height: 0.3;
+  opacity: 0;
+  transition: 0.3s;
+}
+*/

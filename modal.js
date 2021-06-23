@@ -10,7 +10,6 @@ function editNav() {
 // DOM Elements
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
-const textControl = document.querySelectorAll(".textControl");
 const closeCross = document.querySelectorAll(".close"); //création d'une constante close
 const form = document.getElementById("modalForm");
 const submitBtn = document.querySelectorAll(".btn-submit");
@@ -21,17 +20,12 @@ const birthElem = document.getElementById("birthdate");
 const qtityElem = document.getElementById("quantity");
 const fnCheck = document.getElementById("fnCheck");
 const fnTest = document.getElementById("fnTest");
-const lastCheck = document.getElementById("lastCheck");
-const birthCheck = document.getElementById("birthCheck");
-const mailCheck = document.getElementById("mailCheck");
-const tournoisCheck = document.getElementById("qtityCheck");
-const cityLocation = document.querySelectorAll(".radio");
-const cityCheck = document.getElementById("cityCheck");
-const redBorder = document.querySelector(".formData");
 const modalVal = document.getElementById("modalValid");
 const btnClose = document.querySelectorAll(".btnClose");
-const inputs = document.querySelectorAll(".input");
-
+const redBorderForm = document.querySelector(".formData");
+const lastRedBorderForm = document.querySelector(".lastFormData");
+const red = document.querySelector(".text-control");
+const lastRed = document.querySelector(".last-text-control");
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
@@ -55,22 +49,21 @@ function first() {
   const fnRegExp = /[a-zA-Z-+]{2,}/;
   let checkFnRegExp = fnRegExp.test(fnElem.value);
   if (fnElem.value == "") {
-    redBorder.setAttribute("data-error", "Veuillez entrer un prénom");
-    redBorder.setAttribute("data-error-visible", "true");
-
+    redBorderForm.setAttribute("data-error", "Veuillez entrer un prénom");
+    red.setAttribute("data-error-visible", "true");
     // on affiche un message
     return false;
   }
   if (!checkFnRegExp) {
-    redBorder.setAttribute(
+    redBorderForm.setAttribute(
       "data-error",
       "Veuillez entrer 2 caractères valides ou plus pour le champ du prénom"
     );
-    redBorder.setAttribute("data-error-visible", "true");
+    red.setAttribute("data-error-visible", "true");
     return false;
   } else {
-    redBorder.removeAttribute("data-error", "");
-    redBorder.removeAttribute("data-error-visible", "false");
+    redBorderForm.removeAttribute("data-error", "");
+    red.removeAttribute("data-error-visible", "false");
     return true;
   }
 }
@@ -79,20 +72,21 @@ function last() {
   const lastRegExp = /[a-zA-Z-+]{2,30}/g;
   let checklastRegExp = lastRegExp.test(lastElem.value);
   if (lastElem.value === "") {
-    redBorder.setAttribute("data-error", "Veuillez indiquer un nom");
-    redBorder.setAttribute("data-error-visible", "true");
+    lastRedBorderForm.setAttribute("data-error", "Veuillez indiquer un nom");
+    lastRed.setAttribute("data-error-visible", "true");
+
     return false;
   } else if (!checklastRegExp) {
-    redBorder.setAttribute(
+    lastRedBorderForm.setAttribute(
       "data-error",
       "Veuillez entrer 2 caractères valides ou plus pour le champ du nom"
     );
-    redBorder.setAttribute("data-error-visible", "true");
+    lastRed.setAttribute("data-error-visible", "true");
 
     return false;
   } else {
-    redBorder.removeAttribute("data-error", "");
-    redBorder.removeAttribute("data-error-visible", "false");
+    lastRedBorderForm.removeAttribute("data-error", "");
+    lastRed.removeAttribute("data-error-visible", "false");
     return true;
   }
 }
