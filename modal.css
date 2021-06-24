@@ -271,7 +271,9 @@ label {
 .lastFormData[data-error]::after,
 .mailFormData[data-error]::after,
 .birthFormData[data-error]::after,
-.qtityFormData[data-error]::after {
+.qtityFormData[data-error]::after,
+.cityFormData[data-error]::after,
+.boxesFormData[data-error]::after {
   content: attr(data-error);
   font-size: 0.4em;
   color: red;

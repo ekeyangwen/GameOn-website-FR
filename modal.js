@@ -32,6 +32,11 @@ const birthRed = document.querySelector(".birth-text-control");
 const birthRedBorderForm = document.querySelector(".birthFormData");
 const qtityRed = document.querySelector(".qtity-text-control");
 const qtityRedBorderForm = document.querySelector(".qtityFormData");
+const inputRed = document.querySelector(".checkbox-input");
+const cityRedBorderForm = document.querySelector(".cityFormData");
+const cityCheck = document.getElementsByName("location");
+const boxCheck = document.getElementById("checkbox1");
+const boxRedBorderForm = document.querySelector(".boxesFormData");
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
@@ -109,7 +114,6 @@ function mail() {
       "Veuillez indiquer un email valide"
     );
     mailRed.setAttribute("data-error-visible", "true");
-    console.log("true");
     return false;
   } else {
     mailRedBorderForm.removeAttribute("data-error", "");
@@ -134,7 +138,6 @@ function birthdate() {
       "Veuillez indiquer une date de naissance valide"
     );
     birthRed.setAttribute("data-error-visible", "true");
-    console.log("true");
     return false;
   } else {
     birthRedBorderForm.removeAttribute("data-error", "");
@@ -159,7 +162,6 @@ function quantity() {
       "Veuillez indiquer une valeur numérique"
     );
     qtityRed.setAttribute("data-error-visible", "true");
-    console.log("true");
     return false;
   } else {
     qtityRedBorderForm.removeAttribute("data-error", "");
@@ -168,12 +170,40 @@ function quantity() {
   }
 }
 
+function city() {
+  for (c = 0; c < cityCheck.length; c++) if (cityCheck[c].checked) return true;
+  {
+  }
+  cityRedBorderForm.setAttribute("data-error", "Veuillez indiquer une ville");
+  birthRed.setAttribute("data-error-visible", "true");
+  return false;
+}
+
+function boxes() {
+  if (boxCheck.checked) return true;
+  {
+  }
+  boxRedBorderForm.setAttribute(
+    "data-error",
+    "Veuillez accepter les conditions d'utilisation"
+  );
+  return false;
+}
+
 //Launch Valid form
 submitBtn.forEach((btn) => btn.addEventListener("click", validation));
 
 function validation(e) {
   e.preventDefault();
-  if (!first() || !last() || !mail() || !birthdate() || !quantity()) {
+  if (
+    !first() ||
+    !last() ||
+    !mail() ||
+    !birthdate() ||
+    !quantity() ||
+    !city() ||
+    !boxes()
+  ) {
     modalVal.style.display = "none";
     return false;
   } else {

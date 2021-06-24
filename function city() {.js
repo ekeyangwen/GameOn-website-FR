@@ -386,6 +386,8 @@ function validateRadio(e) {
   return formValid;
   l++;
 }
+
+//   for (b = 0; b < boxCheck.length; b++) [b]
 *
 
   
