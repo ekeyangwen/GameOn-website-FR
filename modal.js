@@ -215,6 +215,7 @@ function validation(e) {
 
 //Close Valid form
 btnClose.forEach((btn) => btn.addEventListener("click", closeValid));
+closeCross.forEach((btn) => btn.addEventListener("click", closeValid));
 function closeValid() {
   modalVal.style.display = "none";
   modalVal.style.aria = "hidden";
