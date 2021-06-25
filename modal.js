@@ -208,6 +208,7 @@ function validation(e) {
     return false;
   } else {
     modalVal.style.display = "block";
+    closeModal();
     return true;
   }
 }

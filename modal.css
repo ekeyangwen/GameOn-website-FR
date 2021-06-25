@@ -68,43 +68,6 @@ img {
   display: none;
 }
 
-@media screen and (max-width: 768px) {
-  .topnav a {
-    display: none;
-  }
-  .topnav a.icon {
-    float: right;
-    display: block;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .topnav.responsive {
-    position: relative;
-  }
-  .topnav.responsive .icon {
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-  .topnav.responsive a {
-    float: none;
-    display: block;
-    text-align: left;
-  }
-}
-
-@media screen and (max-width: 540px) {
-  .topnav a {
-    display: none;
-  }
-  .topnav a.icon {
-    float: right;
-    display: block;
-    margin-top: -15px;
-  }
-}
-
 main {
   font-size: 130%;
   font-weight: bolder;
@@ -115,6 +78,20 @@ main {
   margin: 1px 20px 15px;
   border-radius: 2rem;
   text-align: justify;
+}
+
+.hero-headline {
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 55.06%;
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 62px;
+  color: #000000;
 }
 
 .modal-btn {
@@ -277,6 +254,9 @@ label {
   content: attr(data-error);
   font-size: 0.4em;
   color: red;
+}
+.cityFormData[data-error]::after {
+  margin-left: 2rem;
 }
 
 .checkbox-label,
@@ -534,6 +514,7 @@ footer {
   padding-right: 2vw;
   margin: 0 20px;
 }
+
 @media screen and (max-width: 800px) {
   .hero-section {
     display: block;
@@ -573,6 +554,83 @@ footer {
   }
 }
 
+@media screen and (max-width: 768px) {
+  .topnav a {
+    display: none;
+  }
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .topnav.responsive {
+    position: relative;
+  }
+  .topnav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  body {
+    background-color: white;
+    background-image: none;
+  }
+  .logo {
+    width: 50%;
+  }
+  .topnav {
+    margin-top: 2rem;
+  }
+  .topnav a {
+    display: none;
+  }
+  .topnav a.icon {
+    float: right;
+    display: block;
+    margin-top: -15px;
+    color: red;
+  }
+  .hero-content {
+    padding: 0rem;
+    text-align: center;
+    min-width: auto;
+  }
+  .hero-headline {
+    font-size: 35px;
+    font-weight: bold;
+  }
+  .hero-text {
+    font-size: 12px;
+    text-align: left;
+  }
+  .hero-img img {
+    margin-top: 20px;
+  }
+  .hero-section {
+    min-height: auto;
+  }
+  .content {
+    margin-top: 25%;
+  }
+  .modalValid-body {
+    padding: 15px 8%;
+    margin: 15px auto;
+    width: 100%;
+  }
+  .validTxt {
+    left: 0px;
+  }
+}
 @keyframes modalopen {
   from {
     opacity: 0;
