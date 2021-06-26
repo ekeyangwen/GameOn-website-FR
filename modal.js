@@ -57,12 +57,16 @@ function closeModal() {
 //Validation des champs
 
 function first() {
-  const fnRegExp = /[a-zA-Z-+]{2,}/;
+  const fnRegExp = /[a-zA-Z-+]{2,}/g;
   let checkFnRegExp = fnRegExp.test(fnElem.value);
   if (fnElem.value == "") {
     redBorderForm.setAttribute("data-error", "Veuillez entrer un prénom");
     red.setAttribute("data-error-visible", "true");
     // on affiche un message
+    return false;
+  }
+  if (fnElem.value.trim() === "") {
+    alert("At least 8 characters are required!");
     return false;
   }
   if (!checkFnRegExp) {
@@ -71,7 +75,9 @@ function first() {
       "Veuillez entrer 2 caractères valides ou plus pour le champ du prénom"
     );
     red.setAttribute("data-error-visible", "true");
-    return false;
+    alert(fnElem);
+    let fnTrimCheck = fnElem.value;
+    return fnTrimCheck.trim();
   } else {
     redBorderForm.removeAttribute("data-error", "");
     red.removeAttribute("data-error-visible", "false");
