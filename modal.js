@@ -47,11 +47,14 @@ closeCross.forEach((btn) => btn.addEventListener("click", closeModal));
 function launchModal() {
   modalbg.style.display = "block";
 }
-
+function reset() {
+  form.reset();
+}
 // close modal form
 function closeModal() {
   modalbg.style.display = "none";
   modalbg.style.aria = "hidden";
+  reset();
 }
 
 //Validation des champs
@@ -194,7 +197,6 @@ function boxes() {
 
 //Launch Valid form
 submitBtn.forEach((btn) => btn.addEventListener("click", validation));
-
 function validation(e) {
   e.preventDefault();
   if (
@@ -211,6 +213,7 @@ function validation(e) {
   } else {
     modalVal.style.display = "block";
     closeModal();
+    reset();
     return true;
   }
 }
