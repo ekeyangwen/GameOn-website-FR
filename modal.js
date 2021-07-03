@@ -65,10 +65,6 @@ function first() {
     // on affiche un message
     return false;
   }
-  if (fnElem.value.trim() === "") {
-    alert("At least 8 characters are required!");
-    return false;
-  }
   if (!checkFnRegExp) {
     redBorderForm.setAttribute(
       "data-error",
@@ -108,7 +104,7 @@ function last() {
 }
 
 function mail() {
-  const mailRegExp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}\.[a-z]{2,4}$/g;
+  const mailRegExp = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/g;
   let checkmailRegExp = mailRegExp.test(mailElem.value);
   if (mailElem.value === "") {
     mailRedBorderForm.setAttribute("data-error", "Veuillez indiquer un email");
