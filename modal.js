@@ -208,6 +208,13 @@ function validation(e) {
     !city() ||
     !boxes()
   ) {
+    first() == false;
+    last() == false;
+    mail() == false;
+    birthdate() == false;
+    quantity() == false;
+    city() == false;
+    boxes() == false;
     modalVal.style.display = "none";
     return false;
   } else {
