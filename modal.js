@@ -11,14 +11,14 @@ function editNav() {
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const closeCross = document.querySelectorAll(".close"); //création d'une constante close
-const form = document.getElementById("modalForm");
-const submitBtn = document.querySelectorAll(".btn-submit");
-const fnElem = document.getElementById("first");
-const lastElem = document.getElementById("last");
-const mailElem = document.getElementById("email");
-const birthElem = document.getElementById("birthdate");
-const qtityElem = document.getElementById("quantity");
-const fnCheck = document.getElementById("fnCheck");
+const form = document.getElementById("modalForm"); //création d'une constante pour le formulaire entier
+const submitBtn = document.querySelectorAll(".btn-submit"); //création d'une constante pour le bouton submit
+const fnElem = document.getElementById("first"); //champ prénom
+const lastElem = document.getElementById("last"); //champ nom
+const mailElem = document.getElementById("email"); //champs email
+const birthElem = document.getElementById("birthdate"); //champ date de naissance
+const qtityElem = document.getElementById("quantity"); //champ qtité de tournois
+const fnCheck = document.getElementById("fnCheck"); //champ radio
 const fnTest = document.getElementById("fnTest");
 const modalVal = document.getElementById("modalValid");
 const btnClose = document.querySelectorAll(".btnClose");
@@ -38,20 +38,23 @@ const cityCheck = document.getElementsByName("location");
 const boxCheck = document.getElementById("checkbox1");
 const boxRedBorderForm = document.querySelector(".boxesFormData");
 // launch modal event
-modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
+modalBtn.forEach((btn) => btn.addEventListener("click", launchModal)); //evennement sur le bouton "je m'inscris" pour déclencher fonction launchModal
 
 // close modal event
-closeCross.forEach((btn) => btn.addEventListener("click", closeModal));
+closeCross.forEach((btn) => btn.addEventListener("click", closeModal)); //evennement sur la croix pour déclencher fonction closeModal
 
 // launch modal form
 function launchModal() {
+  //fonction pour afficher la modal formulaire
   modalbg.style.display = "block";
 }
 function reset() {
+  //création de la fonction reset pour réinitialiser tout le formulaire
   form.reset();
 }
 // close modal form
 function closeModal() {
+  // fonction pour fermer la modal
   modalbg.style.display = "none";
   modalbg.style.aria = "hidden";
   reset();
@@ -60,30 +63,33 @@ function closeModal() {
 //Validation des champs
 
 function first() {
-  const fnRegExp = /[a-zA-Z-+]{2,}/g;
-  let checkFnRegExp = fnRegExp.test(fnElem.value);
+  //Regex pour validation du champ prénom
+  const fnRegExp = /[a-zA-Z-+]{2,}/g; //plusieurs lettres (min 2)
+  let checkFnRegExp = fnRegExp.test(fnElem.value); //comparaison entre regex et valeur du champ
   if (fnElem.value == "") {
+    //si champs vide
+    // on affiche un message derreur cf CSS
     redBorderForm.setAttribute("data-error", "Veuillez entrer un prénom");
     red.setAttribute("data-error-visible", "true");
-    // on affiche un message
     return false;
   }
   if (!checkFnRegExp) {
+    //si regex non respectée
+    // on affiche un message derreur cf CSS
     redBorderForm.setAttribute(
       "data-error",
-      "Veuillez entrer 2 caractères valides ou plus pour le champ du prénom"
+      "Veuillez entrer 2 caractères valides ou plus pour le champ du prénom" //message d'erreur
     );
-    red.setAttribute("data-error-visible", "true");
-    alert(fnElem);
-    let fnTrimCheck = fnElem.value;
-    return fnTrimCheck.trim();
+    red.setAttribute("data-error-visible", "true"); // Apparence du message d'erreur cf CSS
+    return fnTrimCheck.trim(); //fonction trim qui n'autorise pas les espaces
   } else {
-    redBorderForm.removeAttribute("data-error", "");
-    red.removeAttribute("data-error-visible", "false");
+    //autrement
+    redBorderForm.removeAttribute("data-error", ""); //suppression du message d'erreur
+    red.removeAttribute("data-error-visible", "false"); // supression de la mise en forme CSS
     return true;
   }
 }
-
+//cf first même process
 function last() {
   const lastRegExp = /[a-zA-Z-+]{2,30}/g;
   let checklastRegExp = lastRegExp.test(lastElem.value);
@@ -98,14 +104,14 @@ function last() {
       "Veuillez entrer 2 caractères valides ou plus pour le champ du nom"
     );
     lastRed.setAttribute("data-error-visible", "true");
-    return false;
+    return lastTrimCheck.trim();
   } else {
     lastRedBorderForm.removeAttribute("data-error", "");
     lastRed.removeAttribute("data-error-visible", "false");
     return true;
   }
 }
-
+//cf first même process
 function mail() {
   const mailRegExp = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/g;
   let checkmailRegExp = mailRegExp.test(mailElem.value);
@@ -119,14 +125,14 @@ function mail() {
       "Veuillez indiquer un email valide"
     );
     mailRed.setAttribute("data-error-visible", "true");
-    return false;
+    return mailTrimCheck.trim();
   } else {
     mailRedBorderForm.removeAttribute("data-error", "");
     mailRed.removeAttribute("data-error-visible", "false");
     return true;
   }
 }
-
+//cf first même process
 function birthdate() {
   const birthRegExp = /[^a-z]/;
   let checkbirthRegExp = birthRegExp.test(birthElem.value);
@@ -143,14 +149,14 @@ function birthdate() {
       "Veuillez indiquer une date de naissance valide"
     );
     birthRed.setAttribute("data-error-visible", "true");
-    return false;
+    return birthdateTrimCheck.trim();
   } else {
     birthRedBorderForm.removeAttribute("data-error", "");
     birthRed.removeAttribute("data-error-visible", "false");
     return true;
   }
 }
-
+//cf first même process
 function quantity() {
   const quantityRegExp = /[0-9+]/g;
   let checkQtityRegExp = quantityRegExp.test(qtityElem.value);
@@ -167,28 +173,32 @@ function quantity() {
       "Veuillez indiquer une valeur numérique"
     );
     qtityRed.setAttribute("data-error-visible", "true");
-    return false;
+    return quantityTrimCheck.trim();
   } else {
     qtityRedBorderForm.removeAttribute("data-error", "");
     qtityRed.removeAttribute("data-error-visible", "false");
     return true;
   }
 }
-
+// validation des boutons radio
 function city() {
   for (c = 0; c < cityCheck.length; c++) if (cityCheck[c].checked) return true;
+  /*"c" premiere entrée, tant que"c" est plus petit que la longueur des entrées on passe à c+1 pour vérification du champ*/
+  //si "c" est checked qqpart on retourne une validation
   {
-  }
+  } //sinon message d'erreur
   cityRedBorderForm.setAttribute("data-error", "Veuillez indiquer une ville");
   birthRed.setAttribute("data-error-visible", "true");
   return false;
 }
 
+//validation des checkbox
 function boxes() {
-  if (boxCheck.checked) return true;
+  if (boxCheck.checked) return true; //si la case est coché on retourne une validation
   {
   }
   boxRedBorderForm.setAttribute(
+    //sinon message d'erreur
     "data-error",
     "Veuillez accepter les conditions d'utilisation"
   );
@@ -196,10 +206,12 @@ function boxes() {
 }
 
 //Launch Valid form
-submitBtn.forEach((btn) => btn.addEventListener("click", validation));
+submitBtn.forEach((btn) => btn.addEventListener("click", validation)); //evennement sur le bouton submit
 function validation(e) {
-  e.preventDefault();
+  //fonction renvoyée sur "onclick" de la modal
+  e.preventDefault(); //empêche le comportement par defaut (cad envoi du formulaire)
   if (
+    //si first = faux OU (||) last= faux...etc)
     !first() ||
     !last() ||
     !mail() ||
@@ -208,6 +220,7 @@ function validation(e) {
     !city() ||
     !boxes()
   ) {
+    //alors first, last, etc...renvoient un message d'erreur en même temps
     first() == false;
     last() == false;
     mail() == false;
@@ -218,17 +231,17 @@ function validation(e) {
     modalVal.style.display = "none";
     return false;
   } else {
-    modalVal.style.display = "block";
-    closeModal();
-    reset();
+    modalVal.style.display = "block"; //sinon on affiche la modal de validation
+    closeModal(); //on ferme la modal du formulaire
+    reset(); //on réinitialise le formulaire
     return true;
   }
 }
 
 //Close Valid form
-btnClose.forEach((btn) => btn.addEventListener("click", closeValid));
-closeCross.forEach((btn) => btn.addEventListener("click", closeValid));
+btnClose.forEach((btn) => btn.addEventListener("click", closeValid)); //evenement sur le bouton Close de la modal de validation
+closeCross.forEach((btn) => btn.addEventListener("click", closeValid)); //evenement sur la croix entraine la fonction closeValid
 function closeValid() {
-  modalVal.style.display = "none";
+  modalVal.style.display = "none"; //disparition de la modal
   modalVal.style.aria = "hidden";
 }
