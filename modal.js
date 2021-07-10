@@ -113,7 +113,7 @@ function last() {
 }
 //cf first même process
 function mail() {
-  const mailRegExp = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/g;
+  const mailRegExp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}\.[a-z]{2,4}$/g;
   let checkmailRegExp = mailRegExp.test(mailElem.value);
   if (mailElem.value === "") {
     mailRedBorderForm.setAttribute("data-error", "Veuillez indiquer un email");
@@ -182,11 +182,15 @@ function quantity() {
 }
 // validation des boutons radio
 function city() {
-  for (c = 0; c < cityCheck.length; c++) if (cityCheck[c].checked) return true;
-  /*"c" premiere entrée, tant que"c" est plus petit que la longueur des entrées on passe à c+1 pour vérification du champ*/
-  //si "c" est checked qqpart on retourne une validation
-  {
-  } //sinon message d'erreur
+  for (
+    c = 0;
+    c < cityCheck.length;
+    c++ /*"c" premiere entrée, tant que"c" est plus petit que la longueur des entrées on passe à c+1 pour vérification du champ*/
+  )
+    if (cityCheck[c].checked) {
+      //si "c" est checked qqpart on retourne une validation
+      return true;
+    } //sinon message d'erreur
   cityRedBorderForm.setAttribute("data-error", "Veuillez indiquer une ville");
   birthRed.setAttribute("data-error-visible", "true");
   return false;
@@ -210,31 +214,30 @@ submitBtn.forEach((btn) => btn.addEventListener("click", validation)); //evennem
 function validation(e) {
   //fonction renvoyée sur "onclick" de la modal
   e.preventDefault(); //empêche le comportement par defaut (cad envoi du formulaire)
+  let firstResult = first();
+  let lastResult = last();
+  let mailResult = mail();
+  let birthdateResult = birthdate();
+  let quantityResult = quantity();
+  let cityResult = city();
+  let boxesResult = boxes();
   if (
-    //si first = faux OU (||) last= faux...etc)
-    !first() ||
-    !last() ||
-    !mail() ||
-    !birthdate() ||
-    !quantity() ||
-    !city() ||
-    !boxes()
+    //si chaque entrée est vérifiée
+    firstResult &&
+    lastResult &&
+    mailResult &&
+    birthdateResult &&
+    quantityResult &&
+    cityResult &&
+    boxesResult
   ) {
-    //alors first, last, etc...renvoient un message d'erreur en même temps
-    first() == false;
-    last() == false;
-    mail() == false;
-    birthdate() == false;
-    quantity() == false;
-    city() == false;
-    boxes() == false;
-    modalVal.style.display = "none";
-    return false;
-  } else {
-    modalVal.style.display = "block"; //sinon on affiche la modal de validation
+    modalVal.style.display = "block"; //on affiche la modal de validation
     closeModal(); //on ferme la modal du formulaire
     reset(); //on réinitialise le formulaire
     return true;
+  } else {
+    modalVal.style.display = "none";
+    return false;
   }
 }
 
@@ -244,4 +247,5 @@ closeCross.forEach((btn) => btn.addEventListener("click", closeValid)); //evenem
 function closeValid() {
   modalVal.style.display = "none"; //disparition de la modal
   modalVal.style.aria = "hidden";
+  reset(); //on réinitialise le formulaire
 }
