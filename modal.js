@@ -81,7 +81,7 @@ function first() {
       "Veuillez entrer 2 caractères valides ou plus pour le champ du prénom" //message d'erreur
     );
     red.setAttribute("data-error-visible", "true"); // Apparence du message d'erreur cf CSS
-    return fnTrimCheck.trim(); //fonction trim qui n'autorise pas les espaces
+    return false;
   } else {
     //autrement
     redBorderForm.removeAttribute("data-error", ""); //suppression du message d'erreur
@@ -104,7 +104,7 @@ function last() {
       "Veuillez entrer 2 caractères valides ou plus pour le champ du nom"
     );
     lastRed.setAttribute("data-error-visible", "true");
-    return lastTrimCheck.trim();
+    return false;
   } else {
     lastRedBorderForm.removeAttribute("data-error", "");
     lastRed.removeAttribute("data-error-visible", "false");
@@ -113,7 +113,7 @@ function last() {
 }
 //cf first même process
 function mail() {
-  const mailRegExp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}\.[a-z]{2,4}$/g;
+  const mailRegExp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}\.[a-zA-Z]{2,4}$/g;
   let checkmailRegExp = mailRegExp.test(mailElem.value);
   if (mailElem.value === "") {
     mailRedBorderForm.setAttribute("data-error", "Veuillez indiquer un email");
@@ -125,7 +125,7 @@ function mail() {
       "Veuillez indiquer un email valide"
     );
     mailRed.setAttribute("data-error-visible", "true");
-    return mailTrimCheck.trim();
+    return false;
   } else {
     mailRedBorderForm.removeAttribute("data-error", "");
     mailRed.removeAttribute("data-error-visible", "false");
@@ -149,13 +149,13 @@ function birthdate() {
       "Veuillez indiquer une date de naissance valide"
     );
     birthRed.setAttribute("data-error-visible", "true");
-    return birthdateTrimCheck.trim();
-  } else {
-    birthRedBorderForm.removeAttribute("data-error", "");
-    birthRed.removeAttribute("data-error-visible", "false");
-    return true;
+    return false;
   }
+  birthRedBorderForm.removeAttribute("data-error", "");
+  birthRed.removeAttribute("data-error-visible", "false");
+  return true;
 }
+
 //cf first même process
 function quantity() {
   const quantityRegExp = /[0-9+]/g;
@@ -173,7 +173,7 @@ function quantity() {
       "Veuillez indiquer une valeur numérique"
     );
     qtityRed.setAttribute("data-error-visible", "true");
-    return quantityTrimCheck.trim();
+    return false;
   } else {
     qtityRedBorderForm.removeAttribute("data-error", "");
     qtityRed.removeAttribute("data-error-visible", "false");
@@ -189,8 +189,11 @@ function city() {
   )
     if (cityCheck[c].checked) {
       //si "c" est checked qqpart on retourne une validation
+      cityRedBorderForm.setAttribute("data-error", "");
+      birthRed.setAttribute("data-error-visible", "false");
       return true;
-    } //sinon message d'erreur
+    }
+  //sinon message d'erreur
   cityRedBorderForm.setAttribute("data-error", "Veuillez indiquer une ville");
   birthRed.setAttribute("data-error-visible", "true");
   return false;
@@ -198,15 +201,16 @@ function city() {
 
 //validation des checkbox
 function boxes() {
-  if (boxCheck.checked) return true; //si la case est coché on retourne une validation
-  {
+  if (boxCheck.checked) {
+    return true; //si la case est coché on retourne une validation
+  } else {
+    boxRedBorderForm.setAttribute(
+      //sinon message d'erreur
+      "data-error",
+      "Veuillez accepter les conditions d'utilisation"
+    );
+    return false;
   }
-  boxRedBorderForm.setAttribute(
-    //sinon message d'erreur
-    "data-error",
-    "Veuillez accepter les conditions d'utilisation"
-  );
-  return false;
 }
 
 //Launch Valid form
@@ -245,7 +249,7 @@ function validation(e) {
 btnClose.forEach((btn) => btn.addEventListener("click", closeValid)); //evenement sur le bouton Close de la modal de validation
 closeCross.forEach((btn) => btn.addEventListener("click", closeValid)); //evenement sur la croix entraine la fonction closeValid
 function closeValid() {
+  reset(); //on réinitialise le formulaire
   modalVal.style.display = "none"; //disparition de la modal
   modalVal.style.aria = "hidden";
-  reset(); //on réinitialise le formulaire
 }
