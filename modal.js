@@ -202,6 +202,11 @@ function city() {
 //validation des checkbox
 function boxes() {
   if (boxCheck.checked) {
+    boxRedBorderForm.setAttribute(
+      //aucun message prêt pour la validation
+      "data-error",
+      ""
+    );
     return true; //si la case est coché on retourne une validation
   } else {
     boxRedBorderForm.setAttribute(
