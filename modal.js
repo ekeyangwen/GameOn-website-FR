@@ -186,19 +186,19 @@ function city() {
     c = 0;
     c < cityCheck.length;
     c++ /*"c" premiere entrée, tant que"c" est plus petit que la longueur des entrées on passe à c+1 pour vérification du champ*/
-  )
+  ) {
     if (cityCheck[c].checked) {
       //si "c" est checked qqpart on retourne une validation
       cityRedBorderForm.setAttribute("data-error", "");
       birthRed.setAttribute("data-error-visible", "false");
       return true;
     }
+  }
   //sinon message d'erreur
   cityRedBorderForm.setAttribute("data-error", "Veuillez indiquer une ville");
   birthRed.setAttribute("data-error-visible", "true");
   return false;
 }
-
 //validation des checkbox
 function boxes() {
   if (boxCheck.checked) {
